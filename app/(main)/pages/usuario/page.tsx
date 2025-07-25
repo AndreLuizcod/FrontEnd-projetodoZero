@@ -24,8 +24,8 @@ const Usuario = () => {
 
     const [usuarios, setUsuarios] = useState<Projeto.Usuario[]>([]);
     const [usuarioDialog, setUsuarioDialog] = useState(false);
-    const [deleteUsuariosDialog, setDeleteUsuariosDialog] = useState(false);
     const [deleteUsuarioDialog, setDeleteUsuarioDialog] = useState(false);
+    const [deleteUsuariosDialog, setDeleteUsuariosDialog] = useState(false);
     const [usuario, setUsuario] = useState<Projeto.Usuario>(usuarioVazio);
     const [selectedUsuarios, setSelectedUsuarios] = useState<Projeto.Usuario[]>([]);
     const [submitted, setSubmitted] = useState(false);
@@ -82,13 +82,14 @@ const Usuario = () => {
                             detail: 'Usuário cadastrado com sucesso!'
                         });
                     }).catch((error) => {
-                        console.log(error.data.message);
-                        toast.current?.show({
-                            severity: 'error',
-                            summary: 'Erro',
-                            detail: 'Erro ao salvar!' + error.data.message
-                        });
-                    })
+                const mensagemErro = error?.response?.data?.message || 'Erro ao salvar.';
+                console.log(mensagemErro);
+                toast.current?.show({
+                    severity: 'error',
+                    summary: 'Erro',
+                    detail: 'Erro ao salvar! ' + mensagemErro
+                });
+            })
         }   else {
                 usuarioService.alterar(usuario)
                     .then((response) => {
