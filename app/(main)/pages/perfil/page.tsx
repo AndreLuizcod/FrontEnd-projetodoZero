@@ -20,7 +20,7 @@ const Perfil = () => {
         descricao: '',
     };
 
-    const [perfis, setPerfis] = useState<Projeto.Perfil[]>([]);
+    const [perfis, setPerfis] = useState<Projeto.Perfil[] | null>(null);
     const [perfilDialog, setPerfilDialog] = useState(false);
     const [deletePerfilDialog, setDeletePerfilDialog] = useState(false);
     const [deletePerfisDialog, setDeletePerfisDialog] = useState(false);
@@ -34,7 +34,7 @@ const Perfil = () => {
 
 
     useEffect(() => {
-        if (perfis.length == 0) {
+        if (!perfis) {
             perfilService.listarTodos()
                 .then((response) => {
                     console.log(response.data);
@@ -73,7 +73,7 @@ const Perfil = () => {
                 .then((response) => {
                     setPerfilDialog(false);
                     setPerfil(perfilVazio);
-                    setPerfis([]);
+                    setPerfis(null);
                     toast.current?.show({
                         severity: 'info',
                         summary: 'Sucesso',
@@ -93,7 +93,7 @@ const Perfil = () => {
                 .then((response) => {
                     setPerfilDialog(false);
                     setPerfil(perfilVazio);
-                    setPerfis([]);
+                    setPerfis(null);
                     toast.current?.show({
                         severity: 'info',
                         summary: 'Sucesso',
@@ -126,7 +126,7 @@ const Perfil = () => {
                 .then((responde) => {
                     setDeletePerfilDialog(false);
                     setPerfil(perfilVazio);
-                    setPerfis([]);
+                    setPerfis(null);
                     toast.current?.show({
                         severity: 'success',
                         summary: 'Sucesso!',
@@ -164,7 +164,7 @@ const Perfil = () => {
                     })
             }
         })).then((response) => {
-            setPerfis([]);
+            setPerfis(null);
             setSelectedPerfis([])
             setDeletePerfisDialog(false)
             toast.current?.show({
@@ -248,7 +248,7 @@ const Perfil = () => {
 
     const header = (
         <div className="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-            <h5 className="m-0">Gerenciamento de Usuário </h5>
+            <h5 className="m-0">Gerenciamento de Perfil </h5>
             <span className="block mt-2 md:mt-0 p-input-icon-left">
                 <i className="pi pi-search" />
                 <InputText type="search" onInput={(e) => setGlobalFilter(e.currentTarget.value)} placeholder="Search..." />
