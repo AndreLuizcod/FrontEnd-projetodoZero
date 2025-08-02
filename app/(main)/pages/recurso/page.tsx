@@ -88,7 +88,7 @@ const Recurso = () => {
                     summary: 'Erro',
                     detail: 'Erro ao salvar! ' + mensagemErro
                 });
-            })
+            });
     }else {
                 recursoService.alterar(recurso)
                     .then((response) => {
