@@ -25,6 +25,7 @@ const PermissaoPerfilRecurso = () => {
         recurso: {nome: '', chave: ''}
     };
 
+
     const [permissaoPerfilRecursos, setPermissaoPerfilRecursos] = useState<Projeto.PermissaoPerfilRecurso[] | null>(null);
     const [permissaoPerfilRecursoDialog, setPermissaoPerfilRecursoDialog] = useState(false);
     const [deletePermissaoPerfilRecursoDialog, setDeletePermissaoPerfilRecursoDialog] = useState(false);
